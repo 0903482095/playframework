@@ -38,6 +38,7 @@ trait ServerSpec extends Specification with BeforeAll {
     System.setProperty("play.server.provider", serverProvider)
   }
 
+<<<<<<< HEAD
   private def withServer[T](server: Server)(block: Server => T): T = {
     try {
       block(server)
@@ -45,6 +46,11 @@ trait ServerSpec extends Specification with BeforeAll {
       server.stop()
     }
   }
+=======
+  private def withServer[T](server: Server)(block: Server => T): T =
+    try block(server)
+    finally server.stop()
+>>>>>>> 9c02d454a6... Run scalafmt for integration tests code
 
   "Java Server" should {
 

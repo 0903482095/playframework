@@ -651,6 +651,24 @@ trait JavaResultsHandlingSpec
       response.header(CONTENT_LENGTH) must beSome("5")
       response.header(TRANSFER_ENCODING) must beNone
       response.body must_== "hello"
+<<<<<<< HEAD
+=======
+      response.contentType must_== "application/octet-stream"
+    }
+
+    "not chunk input stream results with content type set if a content length is set" in makeRequest(
+      new MockController {
+        def action(request: Http.Request) = {
+          // chunk size 2 to force more than one chunk
+          Results.ok().sendInputStream(new ByteArrayInputStream("hello".getBytes("utf-8")), 5, Optional.of(HTML))
+        }
+      }
+    ) { response =>
+      response.header(CONTENT_LENGTH) must beSome("5")
+      response.header(TRANSFER_ENCODING) must beNone
+      response.body must_== "hello"
+      response.contentType must startWith("text/html")
+>>>>>>> 9c02d454a6... Run scalafmt for integration tests code
     }
 
     "when changing the content-type" should {
@@ -719,6 +737,37 @@ trait JavaResultsHandlingSpec
       }) { response =>
         response.header(CONTENT_TYPE) must beNone
       }
+<<<<<<< HEAD
+=======
+
+      "correct set it when sending entity as attachment" in makeRequest(new MockController {
+        def action(request: Http.Request) = {
+          Results
+            .ok()
+            .sendEntity(
+              new HttpEntity.Strict(ByteString("hello world"), Optional.of("schmitch/foo; bar=bax")),
+              false,
+              Optional.of("file.xml")
+            )
+        }
+      }) { response =>
+        // Use starts with because there is also the charset
+        response.header(CONTENT_TYPE) must beSome.which(_.startsWith("application/xml"))
+        response.header(CONTENT_DISPOSITION) must beSome("""attachment; filename="file.xml"""")
+      }
+
+      "correct set it when sending json as attachment" in makeRequest(new MockController {
+        def action(request: Http.Request) = {
+          val objectNode = Json.newObject
+          objectNode.put("foo", "bar")
+          Results.ok().sendJson(objectNode, false, Optional.of("file.txt")) // even though the extension is txt, the content-type is json
+        }
+      }) { response =>
+        // Use starts with because there is also the charset
+        response.header(CONTENT_TYPE) must beSome.which(_.startsWith("application/json"))
+        response.header(CONTENT_DISPOSITION) must beSome("""attachment; filename="file.txt"""")
+      }
+>>>>>>> 9c02d454a6... Run scalafmt for integration tests code
     }
 
   }
