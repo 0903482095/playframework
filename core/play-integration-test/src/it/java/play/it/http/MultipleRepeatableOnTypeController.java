@@ -13,8 +13,14 @@ import play.it.http.ActionCompositionOrderTest.SomeRepeatable;
 @SomeRepeatable // once more, so makes it four
 public class MultipleRepeatableOnTypeController extends MockController {
 
+<<<<<<< HEAD
     public Result action() {
         return Results.ok();
     }
 
+=======
+  public Result action(Http.Request request) {
+    return Results.ok();
+  }
+>>>>>>> bd30e5f6aa... Java code format for integration tests
 }

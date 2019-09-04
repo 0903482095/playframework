@@ -12,8 +12,14 @@ import play.it.http.ActionCompositionOrderTest.SomeRepeatable;
 @SomeRepeatable // runs two actions
 public class SingleRepeatableOnTypeController extends MockController {
 
+<<<<<<< HEAD
     public Result action() {
         return Results.ok();
     }
 
+=======
+  public Result action(Http.Request request) {
+    return Results.ok();
+  }
+>>>>>>> bd30e5f6aa... Java code format for integration tests
 }

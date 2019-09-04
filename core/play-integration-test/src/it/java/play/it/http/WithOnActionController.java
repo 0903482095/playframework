@@ -13,9 +13,16 @@ import play.it.http.ActionCompositionOrderTest.SecondAction;
 
 public class WithOnActionController extends MockController {
 
+<<<<<<< HEAD
     @With({FirstAction.class, SecondAction.class})
     public Result action() {
         return Results.ok();
     }
 
+=======
+  @With({FirstAction.class, SecondAction.class})
+  public Result action(Http.Request request) {
+    return Results.ok();
+  }
+>>>>>>> bd30e5f6aa... Java code format for integration tests
 }
