@@ -137,7 +137,13 @@ class LangSpec extends PlaySpecification {
         val zhHant = Lang("zh-Hant")
 
         implicit val app =
+<<<<<<< HEAD
           GuiceApplicationBuilder().configure("play.i18n.langs" -> Seq(zhHans, zh, azCyrl, enUS).map(_.code)).build()
+=======
+          GuiceApplicationBuilder()
+            .configure("play.i18n.langs" -> Seq(zhHans, zh, azCyrl, enUS).map(_.code))
+            .build()
+>>>>>>> 0b0b2141f4... Fix code format
         val langs = app.injector.instanceOf[Langs]
 
         "with exact match" in {
