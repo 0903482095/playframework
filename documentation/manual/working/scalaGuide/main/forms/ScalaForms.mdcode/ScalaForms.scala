@@ -17,7 +17,7 @@ To use forms, import the following packages into your class:
 
 To make use of validation and constraints, import the following packages into your class:
 
-@[validation-imports](code/ScalaForms.scala)
+@[validation-imports]()
 
 ## Form Basics
 
